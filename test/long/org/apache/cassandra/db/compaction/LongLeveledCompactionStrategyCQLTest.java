@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.db.compaction;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -52,7 +53,7 @@ public class LongLeveledCompactionStrategyCQLTest extends CQLTester
         long start = currentTimeMillis();
         try
         {
-            Random r = new Random();
+            Random r = new SecureRandom();
             Future<?> writes = es.submit(() -> {
 
                 byte[] b = new byte[1024];

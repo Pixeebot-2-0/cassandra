@@ -18,6 +18,7 @@
  */
 package org.apache.cassandra.db.commitlog;
 
+import java.security.SecureRandom;
 import org.apache.cassandra.config.CassandraRelevantProperties;
 import org.apache.cassandra.distributed.shared.WithProperties;
 import org.apache.cassandra.io.util.File;
@@ -637,7 +638,7 @@ public abstract class CommitLogTest
 
         // if we're testing encryption, we need to write out a cipher IV to the descriptor headers
         byte[] buf = new byte[16];
-        new Random().nextBytes(buf);
+        new SecureRandom().nextBytes(buf);
         return Collections.singletonMap(EncryptionContext.ENCRYPTION_IV, Hex.bytesToHex(buf));
     }
 

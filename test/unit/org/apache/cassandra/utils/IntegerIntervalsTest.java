@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.utils;
 
+import java.security.SecureRandom;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -107,7 +108,7 @@ public class IntegerIntervalsTest
     @Test
     public void testExpandToCoverMultiThread() throws InterruptedException
     {
-        Random r = new Random();
+        Random r = new SecureRandom();
         int threads = 16;
         int streamSize = 1000000;
         List<Callable<Void>> tasks = new ArrayList<>(threads);
@@ -232,7 +233,7 @@ public class IntegerIntervalsTest
     @Test
     public void testSetAddMultiThread() throws InterruptedException
     {
-        Random r = new Random();
+        Random r = new SecureRandom();
         int threads = 16;
         int streamSize = 10000;
         List<Callable<Void>> tasks = new ArrayList<>(threads);

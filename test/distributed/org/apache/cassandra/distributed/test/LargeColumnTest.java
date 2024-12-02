@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.distributed.test;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -58,7 +59,7 @@ public class LargeColumnTest extends TestBaseImpl
 
     private void testLargeColumns(int nodes, int columnSize, int rowCount) throws Throwable
     {
-        Random random = new Random();
+        Random random = new SecureRandom();
         long seed = ThreadLocalRandom.current().nextLong();
         logger.info("Using seed {}", seed);
 

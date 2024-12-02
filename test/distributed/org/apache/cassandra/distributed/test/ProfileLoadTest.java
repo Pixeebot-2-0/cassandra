@@ -19,6 +19,7 @@
 package org.apache.cassandra.distributed.test;
 
 import com.google.common.util.concurrent.Uninterruptibles;
+import java.security.SecureRandom;
 import org.apache.cassandra.distributed.Cluster;
 import org.apache.cassandra.distributed.api.ConsistencyLevel;
 import org.apache.cassandra.distributed.api.IInvokableInstance;
@@ -42,7 +43,7 @@ public class ProfileLoadTest extends TestBaseImpl
             // start the scheduled profileload task that samples for 1 second and every second.
             cluster.get(1).nodetoolResult("profileload", "1000", "-i", "1000").asserts().success();
 
-            Random rnd = new Random();
+            Random rnd = new SecureRandom();
             // 800 * 2ms = 1.6 seconds. It logs every second. So it logs at least once.
             for (int i = 0; i < 800; i++)
             {

@@ -20,6 +20,7 @@ package org.apache.cassandra.db.compaction;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
@@ -88,7 +89,7 @@ public class SingleSSTableLCSTaskTest extends CQLTester
         ColumnFamilyStore cfs = getCurrentColumnFamilyStore();
         cfs.disableAutoCompaction();
         byte[] b = new byte[10 * 1024];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         ByteBuffer value = ByteBuffer.wrap(b);
         for (int i = 0; i < 5000; i++)
         {

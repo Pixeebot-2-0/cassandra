@@ -19,6 +19,7 @@
 package org.apache.cassandra.db.tries;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.SortedMap;
@@ -33,7 +34,7 @@ import static org.apache.cassandra.db.tries.InMemoryTrieTestBase.*;
 public class MergeTrieTest
 {
     private static final int COUNT = 15000;
-    Random rand = new Random();
+    Random rand = new SecureRandom();
 
     @Test
     public void testDirect()

@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -96,7 +97,7 @@ public class AbstractTypeByteSourceDecodingBench
         });
     }
 
-    private Random prng = new Random();
+    private Random prng = new SecureRandom();
 
     @Param({"32", "128", "512"})
     private int length;

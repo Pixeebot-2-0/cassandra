@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra.cql3;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.junit.Assume;
@@ -185,7 +186,7 @@ public class TombstonesWithIndexedSSTableTest extends CQLTester
 
     public static String makeRandomString(int length)
     {
-        Random random = new Random();
+        Random random = new SecureRandom();
         char[] chars = new char[length];
         for (int i = 0; i < length; ++i)
             chars[i++] = (char) ('a' + random.nextInt('z' - 'a' + 1));

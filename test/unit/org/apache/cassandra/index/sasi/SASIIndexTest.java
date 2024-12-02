@@ -26,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -181,7 +182,7 @@ public class SASIIndexTest
     {
         String snapshotName = "sasi_test";
         Map<String, Pair<String, Integer>> data = new HashMap<>();
-        Random r = new Random();
+        Random r = new SecureRandom();
 
         for (int i = 0; i < 100; i++)
             data.put(UUID.randomUUID().toString(), Pair.create(UUID.randomUUID().toString(), r.nextInt()));

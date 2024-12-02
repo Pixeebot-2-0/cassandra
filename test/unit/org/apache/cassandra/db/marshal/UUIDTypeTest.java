@@ -21,6 +21,7 @@ package org.apache.cassandra.db.marshal;
  *
  */
 
+import java.security.SecureRandom;
 import static org.apache.cassandra.utils.TimeUUID.Generator.nextTimeUUID;
 import static org.junit.Assert.assertEquals;
 
@@ -261,7 +262,7 @@ public class UUIDTypeTest
     // for all provided types, using permute()
     static Iterable<ByteBuffer[]> permutations(final int randomCount, final byte ... types)
     {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         long seed = random.nextLong();
         random.setSeed(seed);
         System.out.println("UUIDTypeTest.permutations.seed=" + seed);
@@ -336,7 +337,7 @@ public class UUIDTypeTest
 
     static ByteBuffer[] random(int count, byte ... types)
     {
-        Random random = new Random();
+        Random random = new SecureRandom();
         long seed = random.nextLong();
         random.setSeed(seed);
         System.out.println("UUIDTypeTest.random.seed=" + seed);

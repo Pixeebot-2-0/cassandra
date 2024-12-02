@@ -18,6 +18,7 @@
 */
 package org.apache.cassandra.stress.generate;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.apache.commons.math3.random.RandomGenerator;
@@ -26,7 +27,7 @@ import org.apache.commons.math3.random.RandomGenerator;
 // note it is also non-atomically updated, so expects to be used by a single thread
 public class FasterRandom implements RandomGenerator
 {
-    final Random random = new Random();
+    final Random random = new SecureRandom();
 
     private long seed;
     private int reseed;

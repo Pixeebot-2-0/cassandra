@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra.cql3.validation.entities;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 import org.junit.Test;
@@ -684,7 +685,7 @@ public class CollectionsTest extends CQLTester
     @Test
     public void testMapWithLargePartition() throws Throwable
     {
-        Random r = new Random();
+        Random r = new SecureRandom();
         long seed = nanoTime();
         System.out.println("Seed " + seed);
         r.setSeed(seed);

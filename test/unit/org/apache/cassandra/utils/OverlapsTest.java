@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.utils;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -154,7 +155,7 @@ public class OverlapsTest
     {
         int size;
         int range = 100;
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         for (int i = 0; i < 1000; ++i)
         {
             size = rand.nextInt(range) + 2;
@@ -306,7 +307,7 @@ public class OverlapsTest
     {
         int size;
         int range = 100;
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         for (int i = 0; i < 100; ++i)
         {
             size = rand.nextInt(range) + 2;

@@ -20,6 +20,7 @@ package org.apache.cassandra.utils.bytecomparable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -205,7 +206,7 @@ public class ByteSourceSequenceTest
         expectNextComponentNull(comparableBytes);
         assertEquals(ByteSource.TERMINATOR, comparableBytes.next());
 
-        Boolean boolValue = new Random().nextBoolean();
+        Boolean boolValue = new SecureRandom().nextBoolean();
         ByteSource boolSource = BooleanType.instance.asComparableBytes(BooleanType.instance.decompose(boolValue), version);
         comparableBytes = ByteSource.peekable(ByteSource.withTerminator(
                 ByteSource.TERMINATOR,
@@ -230,7 +231,7 @@ public class ByteSourceSequenceTest
     @Test
     public void testOptionalSignedFixedLengthTypesSequence()
     {
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         String randomString = newRandomAlphanumeric(prng, 10);
         byte randomByte = (byte) prng.nextInt();
         short randomShort = (short) prng.nextInt();
@@ -728,7 +729,7 @@ public class ByteSourceSequenceTest
     @Test
     public void testReadingNestedSequence_DecoratedKey()
     {
-        Random prng = new Random();
+        Random prng = new SecureRandom();
 
         MapType<String, BigDecimal> stringDecimalMapType = MapType.getInstance(UTF8, DECIMAL, false);
         Map<String, BigDecimal> stringDecimalMap = new HashMap<>();

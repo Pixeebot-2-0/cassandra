@@ -20,6 +20,7 @@ package org.apache.cassandra.db.tries;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -84,7 +85,7 @@ public class SlicedTrieTest
     });
     public static final Comparator<ByteComparable> BYTE_COMPARABLE_COMPARATOR = (bytes1, bytes2) -> ByteComparable.compare(bytes1, bytes2, Trie.BYTE_COMPARABLE_VERSION);
     private static final int COUNT = 15000;
-    Random rand = new Random();
+    Random rand = new SecureRandom();
 
     @Test
     public void testIntersectRangeDirect()

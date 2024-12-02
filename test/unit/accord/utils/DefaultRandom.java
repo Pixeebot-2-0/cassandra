@@ -18,6 +18,7 @@
 
 package accord.utils;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class DefaultRandom implements RandomSource
@@ -25,7 +26,7 @@ public class DefaultRandom implements RandomSource
     private final Random delegate;
     public DefaultRandom()
     {
-        this.delegate = new Random();
+        this.delegate = new SecureRandom();
     }
 
     public DefaultRandom(long seed)

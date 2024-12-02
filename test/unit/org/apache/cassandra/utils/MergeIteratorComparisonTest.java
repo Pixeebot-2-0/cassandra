@@ -19,6 +19,7 @@
 package org.apache.cassandra.utils;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.*;
 
 import com.google.common.base.Function;
@@ -67,7 +68,7 @@ public class MergeIteratorComparisonTest
     public void testRandomInts()
     {
         System.out.println("testRandomInts");
-        final Random r = new Random();
+        final Random r = new SecureRandom();
         Reducer<Integer, Counted<Integer>> reducer = new Counter<Integer>();
 
         List<List<Integer>> lists = new NaturalListGenerator<Integer>(ITERATOR_COUNT, LIST_LENGTH) {
@@ -101,7 +102,7 @@ public class MergeIteratorComparisonTest
     public void testCombinationInts()
     {
         System.out.println("testCombinationInts");
-        final Random r = new Random();
+        final Random r = new SecureRandom();
         Reducer<Integer, Counted<Integer>> reducer = new Counter<Integer>();
 
         List<List<Integer>> lists = new NaturalListGenerator<Integer>(ITERATOR_COUNT, LIST_LENGTH) {
@@ -152,7 +153,7 @@ public class MergeIteratorComparisonTest
     public void testLCS(int levelCount, int levelMultiplier, float levelOverlap, int countOfL0, int sizeOfL0)
     {
         System.out.printf("testLCS(lc=%d,lm=%d,o=%.2f,L0=%d*%d)\n", levelCount, levelMultiplier, levelOverlap, countOfL0, countOfL0 == 0 ? 0 : sizeOfL0 / countOfL0);
-        final Random r = new Random();
+        final Random r = new SecureRandom();
         Reducer<Integer, Counted<Integer>> reducer = new Counter<Integer>();
         List<List<Integer>> lists = new LCSGenerator<Integer>(Ordering.<Integer>natural(), levelCount, levelMultiplier, levelOverlap) {
             @Override
@@ -176,7 +177,7 @@ public class MergeIteratorComparisonTest
     public void testRandomStrings()
     {
         System.out.println("testRandomStrings");
-        final Random r = new Random();
+        final Random r = new SecureRandom();
         Reducer<String, Counted<String>> reducer = new Counter<String>();
 
         List<List<String>> lists = new NaturalListGenerator<String>(ITERATOR_COUNT, LIST_LENGTH) {
@@ -210,7 +211,7 @@ public class MergeIteratorComparisonTest
     public void testCombinationStrings()
     {
         System.out.println("testCombinationStrings");
-        final Random r = new Random();
+        final Random r = new SecureRandom();
         Reducer<String, Counted<String>> reducer = new Counter<String>();
 
         List<List<String>> lists = new NaturalListGenerator<String>(ITERATOR_COUNT, LIST_LENGTH) {
@@ -294,7 +295,7 @@ public class MergeIteratorComparisonTest
     public void testSets()
     {
         System.out.println("testSets");
-        final Random r = new Random();
+        final Random r = new SecureRandom();
 
         Reducer<KeyedSet<Integer, UUID>, KeyedSet<Integer, UUID>> reducer = new Union<Integer, UUID>();
 
@@ -418,7 +419,7 @@ public class MergeIteratorComparisonTest
 
         int levelIdx, itemIdx;
         int levelItems, overlapItems, runningTotalItems;
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         public LCSGenerator(Comparator<T> comparator, int levelCount, int l1Items, float levelOverlap)
         {

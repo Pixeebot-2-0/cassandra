@@ -20,6 +20,7 @@
 package org.apache.cassandra.utils.memory;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -288,7 +289,7 @@ public class BufferPoolTest
         for (int i = 0; i < maxFreeSlots; i++)
             idxs[i] = maxFreeSlots - 1 - i;
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         rnd.setSeed(seed);
         for (int i = idxs.length - 1; i > 0; i--)
         {
@@ -358,7 +359,7 @@ public class BufferPoolTest
         BufferPool.Chunk chunk = bufferPool.unsafeCurrentChunk();
         assertNotNull(chunk);
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         rnd.setSeed(298347529L);
         while (buffers.size() > 1)
         {
@@ -678,7 +679,7 @@ public class BufferPoolTest
             for (int j = 0; j < threadSizes.length; j++)
                 threadSizes[j] = sizes[(i * numBuffersPerThread + j) % sizes.length];
 
-            final Random rand = new Random();
+            final Random rand = new SecureRandom();
             executorService.submit(new Runnable()
             {
                 @Override

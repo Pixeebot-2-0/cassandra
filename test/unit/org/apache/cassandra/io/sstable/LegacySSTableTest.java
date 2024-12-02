@@ -19,6 +19,7 @@ package org.apache.cassandra.io.sstable;
 
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -624,7 +625,7 @@ public class LegacySSTableTest
     public void testGenerateSstables() throws Throwable
     {
         SSTableFormat<?, ?> format = DatabaseDescriptor.getSelectedSSTableFormat();
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 128; i++)
         {

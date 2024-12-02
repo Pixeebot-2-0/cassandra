@@ -18,6 +18,7 @@
 package org.apache.cassandra.dht;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -73,7 +74,7 @@ public abstract class PartitionerTestCase
      */
     public void assertMidpoint(Token left, Token right, int depth)
     {
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         for (int i = 0; i < 1000; i++)
         {
             assertMidpoint(left, right, rand, depth);
@@ -129,7 +130,7 @@ public abstract class PartitionerTestCase
      */
     public void assertSplit(Token left, Token right, int depth)
     {
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         for (int i = 0; i < 1000; i++)
         {
             assertSplit(left, right ,rand, depth);

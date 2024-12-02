@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.db.tries;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class InMemoryTrieThreadedTest
     private static final int PROGRESS_UPDATE = COUNT / 15;
     private static final int READERS = 8;
     private static final int WALKERS = 2;
-    private static final Random rand = new Random();
+    private static final Random rand = new SecureRandom();
 
     static String value(ByteComparable b)
     {

@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.apache.cassandra.io.util.File;
@@ -179,7 +180,7 @@ public class AsyncStreamingOutputPlusTest
         File file = new File(Files.createTempFile(name, ".txt"));
         file.deleteOnExit();
 
-        Random r = new Random();
+        Random r = new SecureRandom();
         byte [] content = new byte[16];
         r.nextBytes(content);
         Files.write(file.toPath(), content);

@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra.utils.bytecomparable;
 
+import java.security.SecureRandom;
 import org.apache.cassandra.db.marshal.*;
 import org.apache.cassandra.utils.*;
 import org.apache.cassandra.utils.memory.MemoryUtil;
@@ -71,7 +72,7 @@ public class ByteSourceInverseTest
                      -256, -255, -128, -127, -1, 0, 1, 127, 128, 255, 256,
                      Integer.MAX_VALUE - 1, Integer.MAX_VALUE)
                  .forEach(intConsumer);
-        new Random().ints(1000)
+        new SecureRandom().ints(1000)
                     .forEach(intConsumer);
     }
 
@@ -121,7 +122,7 @@ public class ByteSourceInverseTest
                       -256L, -255L, -128L, -127L, -1L, 0L, 1L, 127L, 128L, 255L, 256L,
                       Integer.MAX_VALUE + 1L, Long.MAX_VALUE - 1, Long.MAX_VALUE)
                   .forEach(longConsumer);
-        new Random().longs(1000)
+        new SecureRandom().longs(1000)
                     .forEach(longConsumer);
     }
 
@@ -161,7 +162,7 @@ public class ByteSourceInverseTest
     public void testBadByteSourceForFixedLengthNumbers()
     {
         byte[] bytes = new byte[8];
-        new Random().nextBytes(bytes);
+        new SecureRandom().nextBytes(bytes);
         for (Map.Entry<String, Integer> entries : ImmutableMap.of("getSignedInt", 4,
                   "getSignedLong", 8,
                   "getSignedByte", 1,
@@ -257,7 +258,7 @@ public class ByteSourceInverseTest
         Stream.of(null, "© 2018 DataStax", "", "\n", "\0", "\0\0", "\001", "0", "0\0", "00", "1")
               .forEach(stringConsumer);
 
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         int stringLength = 10;
         String random;
         for (int i = 0; i < 1000; ++i)
@@ -323,7 +324,7 @@ public class ByteSourceInverseTest
             }
 
             byte[] bytes = new byte[1000];
-            Random prng = new Random();
+            Random prng = new SecureRandom();
             for (int i = 0; i < 1000; ++i)
             {
                 prng.nextBytes(bytes);
@@ -345,7 +346,7 @@ public class ByteSourceInverseTest
     {
         Map<Class<?>, Function<Object, ByteSource>> generatorPerType = new HashMap<>();
         List<Object> originalValues = new ArrayList<>();
-        Random prng = new Random();
+        Random prng = new SecureRandom();
 
         generatorPerType.put(String.class, s ->
         {

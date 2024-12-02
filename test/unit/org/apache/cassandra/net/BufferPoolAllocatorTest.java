@@ -19,6 +19,7 @@
 package org.apache.cassandra.net;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -40,7 +41,7 @@ public class BufferPoolAllocatorTest
 
         byte[] content = new byte[300];
 
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         rand.nextBytes(content);
 
         buffer.writeBytes(Arrays.copyOfRange(content, 0, 200));
@@ -68,7 +69,7 @@ public class BufferPoolAllocatorTest
 
         byte[] content = new byte[200];
 
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         rand.nextBytes(content);
 
         buffer.writeBytes(content);
@@ -139,7 +140,7 @@ public class BufferPoolAllocatorTest
 
         byte[] content = new byte[300];
 
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         rand.nextBytes(content);
 
         buffer.writeBytes(Arrays.copyOfRange(content, 0, 200));

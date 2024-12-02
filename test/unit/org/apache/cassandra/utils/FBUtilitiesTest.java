@@ -23,6 +23,7 @@ import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -356,7 +357,7 @@ public class FBUtilitiesTest
     @Test
     public void testPrettyPrintAndParseRandom()
     {
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         String unit = "";
         String sep = "";
         for (int i = 0; i < 1000; ++i)

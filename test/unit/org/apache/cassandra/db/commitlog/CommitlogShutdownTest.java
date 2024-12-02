@@ -19,6 +19,7 @@
 package org.apache.cassandra.db.commitlog;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
@@ -61,7 +62,7 @@ public class CommitlogShutdownTest
     action = "Thread.sleep(50)")
     public void testShutdownWithPendingTasks() throws Exception
     {
-        new Random().nextBytes(entropy);
+        new SecureRandom().nextBytes(entropy);
         DatabaseDescriptor.daemonInitialization();
         DatabaseDescriptor.setCommitLogCompression(new ParameterizedClass("LZ4Compressor", ImmutableMap.of()));
         DatabaseDescriptor.setCommitLogSegmentSize(1);

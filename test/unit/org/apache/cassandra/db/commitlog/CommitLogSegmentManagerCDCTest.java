@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -46,7 +47,7 @@ import org.apache.cassandra.schema.TableMetadata;
 
 public class CommitLogSegmentManagerCDCTest extends CQLTester
 {
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
     // shadow CQLTester#setUpClass
     @BeforeClass

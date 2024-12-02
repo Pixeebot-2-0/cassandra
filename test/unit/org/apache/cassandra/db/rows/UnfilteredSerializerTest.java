@@ -20,6 +20,7 @@ package org.apache.cassandra.db.rows;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -77,7 +78,7 @@ public class UnfilteredSerializerTest
 
     public static void testRowBodySerDe(int cellSize, Function<ByteBuffer, ByteBuffer> transform) throws IOException
     {
-        Random random = new Random();
+        Random random = new SecureRandom();
         ByteBuffer data1 = ByteBuffer.allocate(cellSize);
         ByteBuffer data2 = ByteBuffer.allocate(cellSize);
         random.nextBytes(data1.array());

@@ -21,6 +21,7 @@ package org.apache.cassandra.stress.generate;
  */
 
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -31,7 +32,7 @@ public class DistributionQuantized extends Distribution
 
     final Distribution delegate;
     final long[] bounds;
-    final Random random = new Random();
+    final Random random = new SecureRandom();
 
     public DistributionQuantized(Distribution delegate, int quantas)
     {

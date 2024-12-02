@@ -18,6 +18,7 @@
 package org.apache.cassandra.utils.bytecomparable;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableList;
@@ -79,7 +80,7 @@ public class DecoratedKeyByteSourceTest
     private static ByteBuffer newRandomBytesBuffer()
     {
         byte[] randomBytes = new byte[RANDOM_BYTES_LENGTH];
-        new Random().nextBytes(randomBytes);
+        new SecureRandom().nextBytes(randomBytes);
         return ByteBuffer.wrap(randomBytes);
     }
 }

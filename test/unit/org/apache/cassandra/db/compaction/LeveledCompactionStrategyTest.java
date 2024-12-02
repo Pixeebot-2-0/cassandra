@@ -19,6 +19,7 @@ package org.apache.cassandra.db.compaction;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -129,7 +130,7 @@ public class LeveledCompactionStrategyTest
         ByteBuffer value = ByteBuffer.wrap(new byte[100 * 1024]); // 100 KiB value, make it easy to have multiple files
 
         //Need entropy to prevent compression so size is predictable with compression enabled/disabled
-        new Random().nextBytes(value.array());
+        new SecureRandom().nextBytes(value.array());
 
         // Enough data to have a level 1 and 2
         int rows = 40;
@@ -183,7 +184,7 @@ public class LeveledCompactionStrategyTest
     public void testValidationMultipleSSTablePerLevel() throws Exception
     {
         byte [] b = new byte[100 * 1024];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         ByteBuffer value = ByteBuffer.wrap(b); // 100 KiB value, make it easy to have multiple files
 
         // Enough data to have a level 1 and 2
@@ -261,7 +262,7 @@ public class LeveledCompactionStrategyTest
     {
         // make sure we have SSTables in L1
         byte [] b = new byte[100 * 1024];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         ByteBuffer value = ByteBuffer.wrap(b);
         int rows = 2;
         int columns = 10;
@@ -335,7 +336,7 @@ public class LeveledCompactionStrategyTest
     public void testNewRepairedSSTable() throws Exception
     {
         byte [] b = new byte[100 * 1024];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         ByteBuffer value = ByteBuffer.wrap(b); // 100 KiB value, make it easy to have multiple files
 
         // Enough data to have a level 1 and 2
@@ -518,7 +519,7 @@ public class LeveledCompactionStrategyTest
     {
         // add some data
         byte [] b = new byte[100 * 1024];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         ByteBuffer value = ByteBuffer.wrap(b);
         int rows = 4;
         int columns = 10;
@@ -776,7 +777,7 @@ public class LeveledCompactionStrategyTest
     public void testPerLevelSizeBytes() throws IOException
     {
         byte [] b = new byte[100];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         ByteBuffer value = ByteBuffer.wrap(b);
         int rows = 5;
         int columns = 5;

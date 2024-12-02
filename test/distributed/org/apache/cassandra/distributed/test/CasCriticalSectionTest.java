@@ -19,6 +19,7 @@
 package org.apache.cassandra.distributed.test;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +44,7 @@ import org.apache.cassandra.distributed.api.ConsistencyLevel;
  */
 public class CasCriticalSectionTest extends TestBaseImpl
 {
-    private static Random rng = new Random();
+    private static Random rng = new SecureRandom();
     private static final int threadCount = 5;
     private static final int rowCount = 1;
 

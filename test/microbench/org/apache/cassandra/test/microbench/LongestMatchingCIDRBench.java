@@ -20,6 +20,7 @@ package org.apache.cassandra.test.microbench;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -53,7 +54,7 @@ import org.openjdk.jmh.annotations.Warmup;
 public class LongestMatchingCIDRBench
 {
     CIDRGroupsMappingTable<String> ipv4CidrGroupsMappingTable;
-    static Random random = new Random();
+    static Random random = new SecureRandom();
 
     static List<String> cidrsToInsert = Arrays.asList("100.90.80.70/14",
                                                       "110.100.90.80/15",

@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,7 +63,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Benchmark)
 public class CIDRAuthorizerBench extends CQLTester
 {
-    static Random random = new Random();
+    static Random random = new SecureRandom();
 
     static Map<String, List<String>> usersList = new HashMap<>();
     static List<InetAddress> ipList = new ArrayList<>();

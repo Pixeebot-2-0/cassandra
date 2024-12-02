@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.tools.nodetool;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -78,7 +79,7 @@ public class ForceCompactionTest extends CQLTester
     public void forceCompactMultiplePartitionsTombstoneTest() throws Throwable
     {
         List<String> keysToPurge = new ArrayList<>();
-        Random rand = new Random();
+        Random rand = new SecureRandom();
 
         int numPartitionsToPurge = 1 + rand.nextInt(NUM_PARTITIONS);
         for (int count = 0; count < numPartitionsToPurge; count++)
@@ -111,8 +112,8 @@ public class ForceCompactionTest extends CQLTester
     {
         List<String> keysToPurge = new ArrayList<>();
 
-        Random randPartition = new Random();
-        Random randRow = new Random();
+        Random randPartition = new SecureRandom();
+        Random randRow = new SecureRandom();
 
         for (int count = 0; count < 10; count++)
         {
@@ -144,8 +145,8 @@ public class ForceCompactionTest extends CQLTester
     {
         List<String> keysToPurge = new ArrayList<>();
 
-        Random randPartition = new Random();
-        Random randRow = new Random();
+        Random randPartition = new SecureRandom();
+        Random randRow = new SecureRandom();
 
         for (int count = 0; count < 10; count++)
         {

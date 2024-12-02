@@ -20,6 +20,7 @@ package org.apache.cassandra.security;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Random;
 import javax.crypto.BadPaddingException;
@@ -48,7 +49,7 @@ public class EncryptionUtilsTest
         DatabaseDescriptor.daemonInitialization();
     }
 
-    final Random random = new Random();
+    final Random random = new SecureRandom();
     ICompressor compressor;
     TransparentDataEncryptionOptions tdeOptions;
 

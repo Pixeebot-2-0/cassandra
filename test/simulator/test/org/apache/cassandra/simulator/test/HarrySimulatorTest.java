@@ -19,6 +19,7 @@
 package org.apache.cassandra.simulator.test;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -538,7 +539,7 @@ public class HarrySimulatorTest
             HarrySimulationBuilder factory = new HarrySimulationBuilder(harryConfig, instanceConfigUpdater);
 
             SimulationRunner.beforeAll();
-            long seed = SimulationRunner.parseHex(Optional.ofNullable(this.seed)).orElseGet(() -> new Random().nextLong());
+            long seed = SimulationRunner.parseHex(Optional.ofNullable(this.seed)).orElseGet(() -> new SecureRandom().nextLong());
             logger.info("Seed 0x{}", Long.toHexString(seed));
             configure.accept(factory);
             try (ClusterSimulation<HarrySimulation> clusterSimulation = factory.create(seed))

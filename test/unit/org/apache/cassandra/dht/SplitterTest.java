@@ -19,6 +19,7 @@ package org.apache.cassandra.dht;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -135,7 +136,7 @@ public class SplitterTest
     private static void randomSplitTestNoVNodes(IPartitioner partitioner)
     {
         Splitter splitter = getSplitter(partitioner);
-        Random r = new Random();
+        Random r = new SecureRandom();
         for (int i = 0; i < 10000; i++)
         {
             List<Splitter.WeightedRange> localRanges = generateLocalRanges(1, r.nextInt(4) + 1, splitter, r, partitioner instanceof RandomPartitioner);
@@ -147,7 +148,7 @@ public class SplitterTest
     private static void randomSplitTestVNodes(IPartitioner partitioner)
     {
         Splitter splitter = getSplitter(partitioner);
-        Random r = new Random();
+        Random r = new SecureRandom();
         for (int i = 0; i < 10000; i++)
         {
             // we need many tokens to be able to split evenly over the disks
