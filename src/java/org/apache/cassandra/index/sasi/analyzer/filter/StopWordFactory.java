@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra.index.sasi.analyzer.filter;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -78,7 +79,7 @@ public class StopWordFactory
              BufferedReader r = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)))
         {
                 String line;
-                while ((line = r.readLine()) != null)
+                while ((line = BoundedLineReader.readLine(r, 5_000_000)) != null)
                 {
                     //skip comments (lines starting with # char)
                     if(line.charAt(0) == '#')

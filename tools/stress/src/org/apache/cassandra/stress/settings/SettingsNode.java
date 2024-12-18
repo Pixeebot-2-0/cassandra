@@ -21,6 +21,7 @@ package org.apache.cassandra.stress.settings;
  */
 
 
+import io.github.pixee.security.BoundedLineReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.*;
@@ -50,7 +51,7 @@ public class SettingsNode implements Serializable
                 List<String> tmpNodes = new ArrayList<>();
                 try (BufferedReader in = new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get(options.file.value())))))
                 {
-                    while ((node = in.readLine()) != null)
+                    while ((node = BoundedLineReader.readLine(in, 5_000_000)) != null)
                     {
                         if (node.length() > 0)
                             tmpNodes.add(node);

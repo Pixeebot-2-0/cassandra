@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra.service;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
@@ -521,7 +522,7 @@ public class StartupChecks
             final Path path = File.getPath(MAX_MAP_COUNT_PATH);
             try (final BufferedReader bufferedReader = Files.newBufferedReader(path))
             {
-                final String data = bufferedReader.readLine();
+                final String data = BoundedLineReader.readLine(bufferedReader, 5_000_000);
                 if (data != null)
                 {
                     try

@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.index.sai.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +48,7 @@ public class Glove
 
         while (reader.ready())
         {
-            String line = reader.readLine();
+            String line = BoundedLineReader.readLine(reader, 5_000_000);
 
             String parts[] = line.split(" ");
 

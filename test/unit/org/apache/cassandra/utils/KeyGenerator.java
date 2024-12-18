@@ -18,6 +18,7 @@
 */
 package org.apache.cassandra.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.cassandra.io.util.FileInputStreamPlus;
 
 import java.io.BufferedReader;
@@ -128,7 +129,7 @@ public class KeyGenerator
             {
                 while (br.ready()) 
                 {
-                    br.readLine();
+                    BoundedLineReader.readLine(br, 5_000_000);
                     WORDS++;
                 }
             } 
@@ -169,7 +170,7 @@ public class KeyGenerator
             {
                 try 
                 {
-                    reader.readLine();
+                    BoundedLineReader.readLine(reader, 5_000_000);
                 } 
                 catch (IOException e) 
                 {
@@ -191,7 +192,7 @@ public class KeyGenerator
                 byte[] s = next;
                 for (int i = 0; i < modulo; i++) 
                 {
-                    String line = reader.readLine();
+                    String line = BoundedLineReader.readLine(reader, 5_000_000);
                     next = line == null ? null : line.getBytes();
                 }
                 return s == null ? null : ByteBuffer.wrap(s);

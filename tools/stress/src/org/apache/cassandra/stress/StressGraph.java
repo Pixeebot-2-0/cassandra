@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.stress;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -136,7 +137,7 @@ public class StressGraph
         try
         {
             String line;
-            while ((line = reader.readLine()) != null)
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null)
             {
                 // Detect if we are running multiple thread counts:
                 if (line.startsWith("Thread count was not specified"))

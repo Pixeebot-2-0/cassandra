@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.db.commitlog;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -170,7 +171,7 @@ public class CommitLogSegmentManagerCDCTest extends CQLTester
 
             try (BufferedReader in = new BufferedReader(new FileReader(cdcIndexFile)))
             {
-                input = in.readLine();
+                input = BoundedLineReader.readLine(in, 5_000_000);
             }
         }
 
@@ -200,8 +201,8 @@ public class CommitLogSegmentManagerCDCTest extends CQLTester
 
         // Read index file and confirm second line is COMPLETED
         BufferedReader in = new BufferedReader(new FileReader(cdcIndexFile));
-        String input = in.readLine();
-        input = in.readLine();
+        String input = BoundedLineReader.readLine(in, 5_000_000);
+        input = BoundedLineReader.readLine(in, 5_000_000);
         Assert.assertEquals("Expected COMPLETED in index file, got: " + input, "COMPLETED", input);
         in.close();
     }
@@ -363,7 +364,7 @@ public class CommitLogSegmentManagerCDCTest extends CQLTester
             String line;
             try (BufferedReader br = new BufferedReader(new FileReader(f)))
             {
-                line = br.readLine();
+                line = BoundedLineReader.readLine(br, 5_000_000);
             }
             fileName = f.name();
             offset = Integer.parseInt(line);

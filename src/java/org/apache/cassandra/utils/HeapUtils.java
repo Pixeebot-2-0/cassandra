@@ -18,6 +18,7 @@
 package org.apache.cassandra.utils;
 
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -178,7 +179,7 @@ public final class HeapUtils
         {
             StrBuilder builder = new StrBuilder();
             String line;
-            while ((line = input.readLine()) != null)
+            while ((line = BoundedLineReader.readLine(input, 5_000_000)) != null)
             {
                 builder.appendln(line);
             }

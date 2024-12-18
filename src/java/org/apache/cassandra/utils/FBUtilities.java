@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -1091,9 +1092,9 @@ public class FBUtilities
                     String lineSep = LINE_SEPARATOR.getString();
                     StringBuilder sb = new StringBuilder();
                     String str;
-                    while ((str = in.readLine()) != null)
+                    while ((str = BoundedLineReader.readLine(in, 5_000_000)) != null)
                         sb.append(str).append(lineSep);
-                    while ((str = err.readLine()) != null)
+                    while ((str = BoundedLineReader.readLine(err, 5_000_000)) != null)
                         sb.append(str).append(lineSep);
                     throw new IOException("Exception while executing the command: " + StringUtils.join(pb.command(), " ") +
                                           ", command error Code: " + errCode +

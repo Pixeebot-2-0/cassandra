@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -82,7 +83,7 @@ public class JStackJUnitTask extends JUnitTask
                     {
                         StringBuilder sb = new StringBuilder();
                         String line;
-                        while((line = br.readLine()) != null)
+                        while((line = BoundedLineReader.readLine(br, 5_000_000)) != null)
                         {
                             sb.append(line).append("\n");
                         }

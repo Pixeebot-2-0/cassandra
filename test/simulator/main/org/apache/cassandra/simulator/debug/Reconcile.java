@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.simulator.debug;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -441,7 +442,7 @@ public class Reconcile
         {
             boolean inputHasWaitSites, inputHasWakeSites, inputHasRngCallSites, inputHasTimeCallSites;
             {
-                String modifiers = eventIn.readLine();
+                String modifiers = BoundedLineReader.readLine(eventIn, 5_000_000);
                 if (!modifiers.startsWith("modifiers:"))
                     throw new IllegalStateException();
 
@@ -500,7 +501,7 @@ public class Reconcile
                     while (iter.hasNext())
                     {
                         ++line.line;
-                        String rawInput = eventIn.readLine();
+                        String rawInput = BoundedLineReader.readLine(eventIn, 5_000_000);
                         String input = (inputHasWaitSites != builder.capture().waitSites || inputHasWakeSites != builder.capture().wakeSites)
                                        ? normaliseRecordingInWithoutWaitOrWakeSites(rawInput, inputHasWaitSites && !builder.capture().waitSites, inputHasWakeSites && !builder.capture().wakeSites)
                                        : normaliseRecordingIn(rawInput);
