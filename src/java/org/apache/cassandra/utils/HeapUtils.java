@@ -18,6 +18,7 @@
 package org.apache.cassandra.utils;
 
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -76,7 +77,7 @@ public final class HeapUtils
                     processId.toString(),
                     "GC.class_histogram"};
 
-            logProcessOutput(Runtime.getRuntime().exec(histoCommands));
+            logProcessOutput(SystemCommand.runCommand(Runtime.getRuntime(), histoCommands));
         }
         catch (Throwable e)
         {

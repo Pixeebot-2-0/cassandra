@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra.io.util;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOError;
@@ -351,7 +352,7 @@ public final class PathUtils
             if (!quietly && !Files.exists(path))
                 throw new NoSuchFileException(path.toString());
 
-            Process p = Runtime.getRuntime().exec(cmd);
+            Process p = SystemCommand.runCommand(Runtime.getRuntime(), cmd);
             int result = p.waitFor();
 
             String out, err;
