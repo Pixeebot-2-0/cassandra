@@ -18,6 +18,8 @@
 
 package org.apache.cassandra.distributed.shared;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Method;
@@ -77,12 +79,12 @@ public final class Byteman
             // this is just to make it more clear when you inspect a class that it was created by byteman
             // the code source will show it came from byteman:// which isn't a valid java URL (hence the stream handler
             // override)
-            BYTEMAN = new URL(null, "byteman://", new URLStreamHandler() {
+            BYTEMAN = Urls.create(null, "byteman://", new URLStreamHandler() {
                 protected URLConnection openConnection(URL u)
                 {
                     throw new UnsupportedOperationException();
                 }
-            });
+            }, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         }
         catch (MalformedURLException e)
         {

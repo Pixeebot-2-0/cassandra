@@ -17,6 +17,8 @@
  */
 package org.apache.cassandra.locator;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
@@ -49,7 +51,7 @@ public class SnitchProperties
             if (configURL == null)
                 url = SnitchProperties.class.getClassLoader().getResource(RACKDC_PROPERTY_FILENAME);
             else
-            	url = new URL(configURL);
+            	url = Urls.create(configURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 
             stream = url.openStream(); // catch block handles potential NPE
             properties.load(stream);
