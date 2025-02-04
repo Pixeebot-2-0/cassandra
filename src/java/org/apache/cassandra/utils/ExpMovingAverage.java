@@ -83,9 +83,13 @@ public class ExpMovingAverage implements MovingAverage
             current = average.get();
 
             if (!Double.isNaN(current))
-                update = current + alpha * (val - current);
+                {
+                    update = current + alpha * (val - current);
+                }
             else
-                update = val;   // Not initialized yet. Incidentally, passing NaN will cause reinitialization on the
+                {
+                    update = val;
+                }   // Not initialized yet. Incidentally, passing NaN will cause reinitialization on the
                                 // next update.
         }
         while (!average.compareAndSet(current, update));

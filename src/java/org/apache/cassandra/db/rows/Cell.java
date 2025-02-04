@@ -232,9 +232,13 @@ public abstract class Cell<V> extends ColumnData
         }
 
         if (ttl == LivenessInfo.EXPIRED_LIVENESS_TTL)
-            return localDeletionTime;   // ttl is already expired, localDeletionTime is valid
+            {
+                return localDeletionTime;
+            }
         else
-            return INVALID_DELETION_TIME;  // Invalid as it can't occur without corruption and would cause negative
+            {
+                return INVALID_DELETION_TIME;
+            }  // Invalid as it can't occur without corruption and would cause negative
                                            // timestamp on expiry.
     }
 
