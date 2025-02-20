@@ -359,7 +359,7 @@ public class BufferPoolTest
         assertNotNull(chunk);
 
         Random rnd = new Random();
-        rnd.setSeed(298347529L);
+        rnd.setSeed(System.currentTimeMillis());
         while (buffers.size() > 1)
         {
             int index = rnd.nextInt(buffers.size());

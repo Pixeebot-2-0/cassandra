@@ -54,7 +54,7 @@ public class RandomizedPagingStateTest
     @Test
     public void testFormatChecksPkOnly()
     {
-        rnd.setSeed(1);
+        rnd.setSeed(System.currentTimeMillis());
         TableMetadata metadata = TableMetadata.builder("ks", "tbl")
                                               .addPartitionKeyColumn("pk", BytesType.instance)
                                               .addRegularColumn("v", LongType.instance)
@@ -67,7 +67,7 @@ public class RandomizedPagingStateTest
     @Test
     public void testFormatChecksPkAndCk()
     {
-        rnd.setSeed(1);
+        rnd.setSeed(System.currentTimeMillis());
         TableMetadata metadata = TableMetadata.builder("ks", "tbl")
                                               .addPartitionKeyColumn("pk", BytesType.instance)
                                               .addClusteringColumn("ck", BytesType.instance)
