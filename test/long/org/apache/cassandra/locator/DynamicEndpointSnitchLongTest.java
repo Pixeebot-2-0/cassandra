@@ -20,6 +20,7 @@
 package org.apache.cassandra.locator;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.*;
 
 import org.junit.Test;
@@ -91,7 +92,7 @@ public class DynamicEndpointSnitchLongTest
 
         private final DynamicEndpointSnitch dsnitch;
         private final EndpointsForRange hosts;
-        private final Random random = new Random();
+        private final Random random = new SecureRandom();
 
         public ScoreUpdater(DynamicEndpointSnitch dsnitch, EndpointsForRange hosts)
         {

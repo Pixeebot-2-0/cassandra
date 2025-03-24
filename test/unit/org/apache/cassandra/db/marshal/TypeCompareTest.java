@@ -22,6 +22,7 @@ package org.apache.cassandra.db.marshal;
 
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
@@ -73,7 +74,7 @@ public class TypeCompareTest
     @Test
     public void testLong()
     {
-        Random rng = new Random();
+        Random rng = new SecureRandom();
         ByteBuffer[] data = new ByteBuffer[1000];
         for (int i = 0; i < data.length; i++)
         {
@@ -95,7 +96,7 @@ public class TypeCompareTest
     @Test
     public void testInt()
     {
-        Random rng = new Random();
+        Random rng = new SecureRandom();
         ByteBuffer[] data = new ByteBuffer[1000];
         for (int i = 0; i < data.length; i++)
         {

@@ -22,6 +22,7 @@ import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -145,7 +146,7 @@ public class AbstractTypeByteSourceTest
         };
         testValuesForType(AsciiType.instance, asciiStrings);
 
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         Stream<String> asciiStream = Stream.generate(() -> newRandomAlphanumeric(prng, 10)).limit(1000);
         testValuesForType(AsciiType.instance, asciiStream);
     }
@@ -160,7 +161,7 @@ public class AbstractTypeByteSourceTest
     public void testBytesType()
     {
         List<ByteBuffer> byteBuffers = new ArrayList<>();
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         byte[] byteArray;
         int[] arrayLengths = new int[] {1, 10, 100, 1000};
         for (int length : arrayLengths)
@@ -190,7 +191,7 @@ public class AbstractTypeByteSourceTest
     {
         CompositeType compType = CompositeType.getInstance(UTF8Type.instance, TimeUUIDType.instance, IntegerType.instance);
         List<ByteBuffer> byteBuffers = new ArrayList<>();
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         // Test with complete CompositeType rows
         for (int i = 0; i < 1000; ++i)
         {
@@ -233,7 +234,7 @@ public class AbstractTypeByteSourceTest
                                        new Date());
         testValuesForType(DateType.instance, dates);
 
-        dates = new Random().longs(1000).mapToObj(Date::new);
+        dates = new SecureRandom().longs(1000).mapToObj(Date::new);
         testValuesForType(DateType.instance, dates);
     }
 
@@ -288,7 +289,7 @@ public class AbstractTypeByteSourceTest
                 Double.MAX_VALUE};
         for (double bound : bounds)
         {
-            new Random().doubles(1000)
+            new SecureRandom().doubles(1000)
                         .mapToObj(initial -> BigDecimal.valueOf(initial * bound))
                         .forEach(bigDecimalConsumer);
         }
@@ -311,14 +312,14 @@ public class AbstractTypeByteSourceTest
                                            -12345678910.111213141516);
         testValuesForType(DoubleType.instance, doubles);
 
-        doubles = new Random().doubles(1000).boxed();
+        doubles = new SecureRandom().doubles(1000).boxed();
         testValuesForType(DoubleType.instance, doubles);
     }
 
     @Test
     public void testDurationType()
     {
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         Stream<Duration> posDurations = Stream.generate(() ->
                                                         {
                                                             int months = prng.nextInt(12) + 1;
@@ -348,7 +349,7 @@ public class AbstractTypeByteSourceTest
                                                           "org.apache.cassandra.db.marshal.IntegerType");
         List<ByteBuffer> allValues = new ArrayList<>();
         List<ByteBuffer> byteBuffers = new ArrayList<>();
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         for (int i = 0; i < 10; ++i)
         {
             String randomString = newRandomAlphanumeric(prng, 10);
@@ -453,7 +454,7 @@ public class AbstractTypeByteSourceTest
                                          -123456.7891011F);
         testValuesForType(FloatType.instance, floats);
 
-        floats = new Random().ints(1000).mapToObj(Float::intBitsToFloat);
+        floats = new SecureRandom().ints(1000).mapToObj(Float::intBitsToFloat);
         testValuesForType(FloatType.instance, floats);
     }
 
@@ -474,7 +475,7 @@ public class AbstractTypeByteSourceTest
                                                       InetAddress.getByName("fe80:1:23:456:7890:1:23:456"));
         testValuesForType(InetAddressType.instance, inetAddresses);
 
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         byte[] ipv4Bytes = new byte[4];
         byte[] ipv6Bytes = new byte[16];
         InetAddress[] addresses = new InetAddress[2000];
@@ -501,7 +502,7 @@ public class AbstractTypeByteSourceTest
                                          Integer.MAX_VALUE);
         testValuesForType(Int32Type.instance, ints);
 
-        ints = new Random().ints(1000).boxed();
+        ints = new SecureRandom().ints(1000).boxed();
         testValuesForType(Int32Type.instance, ints);
     }
 
@@ -538,7 +539,7 @@ public class AbstractTypeByteSourceTest
     @Test
     public void testUuidTypes()
     {
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         UUID[] testUuids = new UUID[3001];
         for (int i = 0; i < testUuids.length / 3; ++i)
         {
@@ -576,7 +577,7 @@ public class AbstractTypeByteSourceTest
     public void testListType()
     {
         // Test lists with element components not having known/computable length (e.g. strings).
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         List<List<String>> stringLists = newRandomElementCollections(ArrayList::new,
                                                                      () -> newRandomAlphanumeric(prng, 10),
                                                                      100,
@@ -607,7 +608,7 @@ public class AbstractTypeByteSourceTest
                                        Long.MAX_VALUE);
         testValuesForType(LongType.instance, longs);
 
-        longs = new Random().longs(1000).boxed();
+        longs = new SecureRandom().longs(1000).boxed();
         testValuesForType(LongType.instance, longs);
     }
 
@@ -634,7 +635,7 @@ public class AbstractTypeByteSourceTest
     @Test
     public void testMapType()
     {
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         List<Map<String, UUID>> stringToUuidMaps = newRandomEntryMaps(() -> newRandomAlphanumeric(prng, 10),
                                                                       UUID::randomUUID,
                                                                       100,
@@ -653,7 +654,7 @@ public class AbstractTypeByteSourceTest
     @Test
     public void testPartitionerDefinedOrder()
     {
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         List<ByteBuffer> byteBuffers = new ArrayList<>();
         byteBuffers.add(ByteBufferUtil.EMPTY_BYTE_BUFFER);
         for (int i = 0; i < 1000; ++i)
@@ -742,7 +743,7 @@ public class AbstractTypeByteSourceTest
             BigDecimal randomDecimal = new BigDecimal(randomMantissa, randomScale);
             return DecimalType.instance.decompose(randomDecimal);
         });
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         for (Map.Entry<AbstractType<?>, BiFunction<Random, Integer, ByteBuffer>> entry : bufferGeneratorByType.entrySet())
         {
             ReversedType<?> reversedType = ReversedType.getInstance(entry.getKey());
@@ -763,7 +764,7 @@ public class AbstractTypeByteSourceTest
     public void testSetType()
     {
         // Test sets with element components not having known/computable length (e.g. strings).
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         List<Set<String>> stringSets = newRandomElementCollections(HashSet::new,
                                                                    () -> newRandomAlphanumeric(prng, 10),
                                                                    100,
@@ -794,10 +795,10 @@ public class AbstractTypeByteSourceTest
     {
         testValuesForType(SimpleDateType.instance, new Integer[] { null });
 
-        testValuesForType(SimpleDateType.instance, new Random().ints(1000).boxed());
+        testValuesForType(SimpleDateType.instance, new SecureRandom().ints(1000).boxed());
 
         // Test by manually creating and manually interpreting simple dates from random millis.
-        new Random().ints(1000).forEach(initialMillis ->
+        new SecureRandom().ints(1000).forEach(initialMillis ->
                                          {
                                              initialMillis = Math.abs(initialMillis);
                                              Integer initialDays = SimpleDateSerializer.timeInMillisToDay(initialMillis);
@@ -843,7 +844,7 @@ public class AbstractTypeByteSourceTest
                                        new Date(Long.MIN_VALUE)
                                };
         testValuesForType(TimestampType.instance, dates);
-        testValuesForType(TimestampType.instance, new Random().longs(1000).mapToObj(Date::new));
+        testValuesForType(TimestampType.instance, new SecureRandom().longs(1000).mapToObj(Date::new));
     }
 
     @Test
@@ -851,7 +852,7 @@ public class AbstractTypeByteSourceTest
     {
         testValuesForType(TimeType.instance, new Long[] { null });
 
-        testValuesForType(TimeType.instance, new Random().longs(1000).boxed());
+        testValuesForType(TimeType.instance, new SecureRandom().longs(1000).boxed());
     }
 
     @Test
@@ -861,7 +862,7 @@ public class AbstractTypeByteSourceTest
                                                    DecimalType.instance,
                                                    IntegerType.instance,
                                                    BytesType.instance));
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         List<ByteBuffer> tuplesData = new ArrayList<>();
         String[] utf8Values = new String[]
                                       {
@@ -925,14 +926,14 @@ public class AbstractTypeByteSourceTest
     @Test
     public void testUtf8Type()
     {
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         testValuesForType(UTF8Type.instance, Stream.generate(() -> newRandomAlphanumeric(prng, 100)).limit(1000));
     }
 
     @Test
     public void testTypeWithByteOrderedComparison()
     {
-        Random prng = new Random();
+        Random prng = new SecureRandom();
         byte[] singleByte = new byte[] { (byte) prng.nextInt() };
         byte[] tenBytes = new byte[10];
         prng.nextBytes(tenBytes);

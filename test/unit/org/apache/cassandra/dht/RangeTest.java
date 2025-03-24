@@ -18,6 +18,7 @@
 package org.apache.cassandra.dht;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -650,7 +651,7 @@ public class RangeTest
     @Test
     public void testRandomOrderedRangeContainmentChecker()
     {
-        Random r = new Random();
+        Random r = new SecureRandom();
         for (int j = 0; j < 1000; j++)
         {
             int numTokens = r.nextInt(300) + 1;

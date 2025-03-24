@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.fuzz.harry.gen;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -36,7 +37,7 @@ public class EntropySourceTest
     @Test
     public void testScale()
     {
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         for (int cycle = 0; cycle < RUNS; cycle++)
         {
             int a = rand.nextInt(100);
@@ -62,7 +63,7 @@ public class EntropySourceTest
     @Test
     public void testShuffleUnshuffle()
     {
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
 
         for (int i = 1; i < RUNS; i++)
         {
@@ -128,7 +129,7 @@ public class EntropySourceTest
     @Test
     public void shuffleUnshuffleTest()
     {
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         for (int i = 0; i < RUNS; i++)
         {
             long a = rnd.nextLong();

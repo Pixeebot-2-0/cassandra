@@ -20,6 +20,7 @@ package org.apache.cassandra.utils.bytecomparable;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BiFunction;
@@ -95,7 +96,7 @@ public class ByteSourceConversionTest extends ByteSourceTestBase
     @Test
     public void randomTestInts()
     {
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         for (int i=0; i<10000; ++i)
         {
             int i1 = rand.nextInt();
@@ -510,25 +511,25 @@ public class ByteSourceConversionTest extends ByteSourceTestBase
     @Test
     public void testListTypeString()
     {
-        testCollection(ListType.getInstance(UTF8Type.instance, true), testStrings, () -> new ArrayList<>(), new Random());
+        testCollection(ListType.getInstance(UTF8Type.instance, true), testStrings, () -> new ArrayList<>(), new SecureRandom());
     }
 
     @Test
     public void testListTypeLong()
     {
-        testCollection(ListType.getInstance(LongType.instance, true), testLongs, () -> new ArrayList<>(), new Random());
+        testCollection(ListType.getInstance(LongType.instance, true), testLongs, () -> new ArrayList<>(), new SecureRandom());
     }
 
     @Test
     public void testSetTypeString()
     {
-        testCollection(SetType.getInstance(UTF8Type.instance, true), testStrings, () -> new HashSet<>(), new Random());
+        testCollection(SetType.getInstance(UTF8Type.instance, true), testStrings, () -> new HashSet<>(), new SecureRandom());
     }
 
     @Test
     public void testSetTypeLong()
     {
-        testCollection(SetType.getInstance(LongType.instance, true), testLongs, () -> new HashSet<>(), new Random());
+        testCollection(SetType.getInstance(LongType.instance, true), testLongs, () -> new HashSet<>(), new SecureRandom());
     }
 
     <T, CT extends Collection<T>> void testCollection(CollectionType<CT> tt, T[] values, Supplier<CT> gen, Random rand)
@@ -555,13 +556,13 @@ public class ByteSourceConversionTest extends ByteSourceTestBase
     @Test
     public void testMapTypeStringLong()
     {
-        testMap(MapType.getInstance(UTF8Type.instance, LongType.instance, true), testStrings, testLongs, () -> new HashMap<>(), new Random());
+        testMap(MapType.getInstance(UTF8Type.instance, LongType.instance, true), testStrings, testLongs, () -> new HashMap<>(), new SecureRandom());
     }
 
     @Test
     public void testMapTypeStringLongTree()
     {
-        testMap(MapType.getInstance(UTF8Type.instance, LongType.instance, true), testStrings, testLongs, () -> new TreeMap<>(), new Random());
+        testMap(MapType.getInstance(UTF8Type.instance, LongType.instance, true), testStrings, testLongs, () -> new TreeMap<>(), new SecureRandom());
     }
 
     <K, V, M extends Map<K, V>> void testMap(MapType<K, V> tt, K[] keys, V[] values, Supplier<M> gen, Random rand)

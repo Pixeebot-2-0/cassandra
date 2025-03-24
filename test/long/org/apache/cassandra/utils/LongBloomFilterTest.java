@@ -18,6 +18,7 @@
  */
 package org.apache.cassandra.utils;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -52,8 +53,8 @@ public class LongBloomFilterTest
         int size = 10 * 1000 * 1000;
         IFilter bf = getFilter(size, FilterTestHelper.spec.bucketsPerElement);
         double fp = testFalsePositives(bf,
-                                       new KeyGenerator.RandomStringGenerator(new Random().nextInt(), size),
-                                       new KeyGenerator.RandomStringGenerator(new Random().nextInt(), size));
+                                       new KeyGenerator.RandomStringGenerator(new SecureRandom().nextInt(), size),
+                                       new KeyGenerator.RandomStringGenerator(new SecureRandom().nextInt(), size));
         logger.info("Bloom filter false positive: {}", fp);
     }
 
@@ -165,8 +166,8 @@ public class LongBloomFilterTest
         for (int i = 0; i < 10; i++)
         {
             testFalsePositives(bf,
-                               new KeyGenerator.RandomStringGenerator(new Random().nextInt(), size),
-                               new KeyGenerator.RandomStringGenerator(new Random().nextInt(), size));
+                               new KeyGenerator.RandomStringGenerator(new SecureRandom().nextInt(), size),
+                               new KeyGenerator.RandomStringGenerator(new SecureRandom().nextInt(), size));
 
             bf.clear();
         }

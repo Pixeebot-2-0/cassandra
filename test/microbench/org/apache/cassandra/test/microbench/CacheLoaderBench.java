@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.test.microbench;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -72,7 +73,7 @@ public class CacheLoaderBench
     private static final int numSSTables = 100;
     private static final int numKeysPerTable = 10000;
 
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
 
     @Param({ "true", "false" })
     boolean useUUIDGenerationIdentifiers;

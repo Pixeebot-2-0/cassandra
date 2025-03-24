@@ -19,6 +19,7 @@
 package org.apache.cassandra.test.microbench;
 
 
+import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.Random;
 
@@ -48,7 +49,7 @@ public class StreamingTombstoneHistogramBuilderBench
     static
     {
         final int now = (int) (currentTimeMillis() / 1000L);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for(int i = 0 ; i < 10000000; i++)
         {
             // Seconds in a month

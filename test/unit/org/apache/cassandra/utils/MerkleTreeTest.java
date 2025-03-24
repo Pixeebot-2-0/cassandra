@@ -20,6 +20,7 @@ package org.apache.cassandra.utils;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.*;
 
 import org.junit.Assert;
@@ -327,7 +328,7 @@ public class MerkleTreeTest
         TOKEN_SCALE = new BigInteger("" + max);
 
         mt = new MerkleTree(partitioner, fullRange(), RECOMMENDED_DEPTH, 32);
-        Random random = new Random();
+        Random random = new SecureRandom();
         while (true)
         {
             if (!mt.split(tok(random.nextInt(max))))

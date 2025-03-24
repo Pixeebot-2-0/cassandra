@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.fuzz.harry.util;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,7 +62,7 @@ public class RangesTest
     private void _randomizedRangesTest()
     {
         List<DescriptorRanges.DescriptorRange> rangesList = new ArrayList<>();
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         for (int i = 0; i < 100; i++)
         {
             long a = rnd.nextInt(1000);

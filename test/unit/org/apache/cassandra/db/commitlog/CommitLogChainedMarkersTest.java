@@ -20,6 +20,7 @@ package org.apache.cassandra.db.commitlog;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -79,7 +80,7 @@ public class CommitLogChainedMarkersTest
         ColumnFamilyStore cfs1 = Keyspace.open(KEYSPACE1).getColumnFamilyStore(STANDARD1);
 
         byte[] entropy = new byte[1024];
-        new Random().nextBytes(entropy);
+        new SecureRandom().nextBytes(entropy);
         final Mutation m = new RowUpdateBuilder(cfs1.metadata.get(), 0, "k")
                            .clustering("bytes")
                            .add("val", ByteBuffer.wrap(entropy))

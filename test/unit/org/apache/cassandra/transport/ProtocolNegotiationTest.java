@@ -19,6 +19,7 @@
 package org.apache.cassandra.transport;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import com.google.common.collect.ImmutableMap;
@@ -201,7 +202,7 @@ public class ProtocolNegotiationTest extends CQLTester
         if (version.isBeta())
             builder.useBeta();
 
-        Random r = new Random();
+        Random r = new SecureRandom();
         ProtocolVersion wrongVersion = version;
         while (wrongVersion.isSmallerThan(ProtocolVersion.MIN_SUPPORTED_VERSION) || wrongVersion == version)
             wrongVersion = ProtocolVersion.values()[r.nextInt(ProtocolVersion.values().length - 1)];

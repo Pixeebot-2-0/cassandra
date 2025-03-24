@@ -20,6 +20,7 @@ package org.apache.cassandra.db;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.junit.Before;
@@ -48,7 +49,7 @@ import static org.junit.Assert.fail;
 
 public class ReadResponseTest
 {
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
     private TableMetadata metadata;
 
     @BeforeClass

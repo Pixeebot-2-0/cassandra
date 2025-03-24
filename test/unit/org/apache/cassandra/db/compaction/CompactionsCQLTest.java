@@ -20,6 +20,7 @@ package org.apache.cassandra.db.compaction;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.FileStore;
+import java.security.SecureRandom;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -479,7 +480,7 @@ public class CompactionsCQLTest extends CQLTester
         ColumnFamilyStore cfs = getCurrentColumnFamilyStore();
         cfs.disableAutoCompaction();
         byte [] b = new byte[100 * 1024];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         ByteBuffer value = ByteBuffer.wrap(b);
         for (int i = 0; i < 50; i++)
         {
@@ -510,7 +511,7 @@ public class CompactionsCQLTest extends CQLTester
         assertEquals(1, l1sstable.getSSTableLevel());
         // now we have a single L1 sstable, create many L0 ones:
         byte [] b = new byte[100 * 1024];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         ByteBuffer value = ByteBuffer.wrap(b);
         for (int i = 0; i < 50; i++)
         {
@@ -538,7 +539,7 @@ public class CompactionsCQLTest extends CQLTester
     public void testAbortNotifications() throws Throwable
     {
         createTable("create table %s (id int primary key, x blob) with compaction = {'class':'LeveledCompactionStrategy', 'sstable_size_in_mb':1}");
-        Random r = new Random();
+        Random r = new SecureRandom();
         byte [] b = new byte[100 * 1024];
         for (int i = 0; i < 1000; i++)
         {

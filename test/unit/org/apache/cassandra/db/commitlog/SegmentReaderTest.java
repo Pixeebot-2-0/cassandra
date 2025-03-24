@@ -17,6 +17,7 @@
  */
 package org.apache.cassandra.db.commitlog;
 
+import java.security.SecureRandom;
 import org.apache.cassandra.io.util.*;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -48,7 +49,7 @@ import org.apache.cassandra.utils.ByteBufferUtil;
 
 public class SegmentReaderTest
 {
-    static final Random random = new Random();
+    static final Random random = new SecureRandom();
 
     @BeforeClass
     public static void setupDD()

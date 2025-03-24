@@ -18,6 +18,7 @@
 package org.apache.cassandra.gms;
 
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -161,7 +162,7 @@ public class Gossiper implements IFailureDetectionEventListener, GossiperMBean, 
     // Maximimum difference between generation value and local time we are willing to accept about a peer
     static final int MAX_GENERATION_DIFFERENCE = 86400 * 365;
     private final long fatClientTimeout;
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
 
     /* subscribers for interest in EndpointState change */
     private final List<IEndpointStateChangeSubscriber> subscribers = new CopyOnWriteArrayList<>();

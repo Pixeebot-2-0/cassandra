@@ -18,6 +18,7 @@
 package org.apache.cassandra.io.util;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ import static org.junit.Assert.assertEquals;
 
 public class SafeMemoryWriterTest
 {
-    Random rand = new Random();
+    Random rand = new SecureRandom();
     static final int CHUNK = 54321;
 
     static final long maxDirectMemory;

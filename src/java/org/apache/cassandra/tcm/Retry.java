@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.tcm;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -79,7 +80,7 @@ public abstract class Retry
 
         public Jitter(Meter retryMeter)
         {
-            this(MAX_TRIES, MAX_JITTER_MS, new Random(), retryMeter);
+            this(MAX_TRIES, MAX_JITTER_MS, new SecureRandom(), retryMeter);
         }
 
         private Jitter(int maxTries, int maxJitterMs, Random random, Meter retryMeter)
@@ -169,7 +170,7 @@ public abstract class Retry
         public static Deadline retryIndefinitely(long timeoutNanos, Meter retryMeter)
         {
             return new Deadline(Clock.Global.nanoTime() + timeoutNanos,
-                                new Retry.Jitter(Integer.MAX_VALUE, MAX_JITTER_MS, new Random(), retryMeter))
+                                new Retry.Jitter(Integer.MAX_VALUE, MAX_JITTER_MS, new SecureRandom(), retryMeter))
             {
                 @Override
                 public boolean reachedMax()

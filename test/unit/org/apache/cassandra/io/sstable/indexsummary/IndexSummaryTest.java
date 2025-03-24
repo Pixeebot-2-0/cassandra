@@ -19,6 +19,7 @@ package org.apache.cassandra.io.sstable.indexsummary;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -56,7 +57,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class IndexSummaryTest
 {
-    private final static Random random = new Random();
+    private final static Random random = new SecureRandom();
 
     @BeforeClass
     public static void initDD()

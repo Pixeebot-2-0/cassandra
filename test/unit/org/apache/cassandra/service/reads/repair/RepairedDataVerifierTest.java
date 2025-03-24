@@ -19,6 +19,7 @@
 package org.apache.cassandra.service.reads.repair;
 
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.junit.Before;
@@ -50,7 +51,7 @@ public class RepairedDataVerifierTest
     private static final String KEYSPACE = TEST_NAME + "cql_keyspace";
     private static final String TABLE = "table1";
 
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
     private TableMetadata metadata;
     private TableMetrics metrics;
 

@@ -21,6 +21,7 @@ package org.apache.cassandra.io.compress;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -261,7 +262,7 @@ public class CompressedRandomAccessReaderTest
              RandomAccessReader reader = fh.createReader())
         {// read and verify compressed data
             assertEquals(CONTENT, reader.readLine());
-            Random random = new Random();
+            Random random = new SecureRandom();
             CompressionMetadata.Chunk chunk = meta.chunkFor(0);
             try (RandomAccessFile checksumModifier = new RandomAccessFile(file.toJavaIOFile(), "rw"))
             {

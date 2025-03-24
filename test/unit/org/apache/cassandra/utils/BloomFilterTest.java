@@ -21,6 +21,7 @@ package org.apache.cassandra.utils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
@@ -188,7 +189,7 @@ public class BloomFilterTest
              BloomFilter bf2 = (BloomFilter) FilterFactory.getFilter(FilterTestHelper.ELEMENTS / 2, FilterTestHelper.MAX_FAILURE_RATE);
              BloomFilter bf3 = (BloomFilter) FilterFactory.getFilter(FilterTestHelper.ELEMENTS / 2, FilterTestHelper.MAX_FAILURE_RATE))
         {
-            RandomStringGenerator gen1 = new KeyGenerator.RandomStringGenerator(new Random().nextInt(), FilterTestHelper.ELEMENTS);
+            RandomStringGenerator gen1 = new KeyGenerator.RandomStringGenerator(new SecureRandom().nextInt(), FilterTestHelper.ELEMENTS);
 
             // make sure all bitsets are empty.
             compare(bf1.bitset, bf2.bitset);
@@ -234,7 +235,7 @@ public class BloomFilterTest
     public void testMurmur3FilterHash()
     {
         IPartitioner partitioner = new Murmur3Partitioner();
-        Iterator<ByteBuffer> gen = new KeyGenerator.RandomStringGenerator(new Random().nextInt(), FilterTestHelper.ELEMENTS);
+        Iterator<ByteBuffer> gen = new KeyGenerator.RandomStringGenerator(new SecureRandom().nextInt(), FilterTestHelper.ELEMENTS);
         long[] expected = new long[2];
         long[] actual = new long[2];
         while (gen.hasNext())
