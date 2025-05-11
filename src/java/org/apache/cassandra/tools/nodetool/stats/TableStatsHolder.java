@@ -508,7 +508,9 @@ public class TableStatsHolder implements StatsHolder
                 // only a keyspace with no tables was supplied
                 // so ignore or include (based on the flag) every column family in specified keyspace
             else if (tables.isEmpty())
-                return !ignoreMode;
+                {
+                    return !ignoreMode;
+                }
 
             // keyspace exists, and it contains specific table
             verifier.get(keyspace).remove(table);

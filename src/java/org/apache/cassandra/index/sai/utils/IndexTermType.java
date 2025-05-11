@@ -457,7 +457,9 @@ public class IndexTermType
             // BigInteger values, frozen types and composite types (map entries) use compareUnsigned to maintain
             // a consistent order between the in-memory index and the on-disk index.
         else if (isBigInteger() || isBigDecimal() || isComposite() || isFrozen())
-            return FastByteOperations.compareUnsigned(b1, b2);
+            {
+                return FastByteOperations.compareUnsigned(b1, b2);
+            }
 
         return indexType.compare(b1, b2 );
     }
@@ -532,8 +534,10 @@ public class IndexTermType
             return ByteSource.optionalSignedFixedLengthNumber(ByteBufferAccessor.instance, value);
         else if (isFrozen())
             // We need to override the default frozen implementation here because it will defer to the underlying
-            // type's implementation which will be incorrect, for us, for the case of multi-cell types.
-            return ByteSource.of(value, version);
+            
+            {
+                return ByteSource.of(value, version);
+            }
         return indexType.asComparableBytes(value, version);
     }
 

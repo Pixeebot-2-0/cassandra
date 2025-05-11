@@ -144,7 +144,9 @@ public class ConfigGenBuilder
 
     private void updateConfigPartitioner(RandomSource rs, Map<String, Object> config)
     {
-        if (partitionerGen == null) return;;
+        if (partitionerGen == null) {
+            return;
+        };
         IPartitioner partitioner = partitionerGen.next(rs);
         config.put("partitioner", partitioner.getClass().getSimpleName());
     }
