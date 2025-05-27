@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.cql3;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,7 +47,7 @@ public final class ReservedKeywords
              BufferedReader r = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)))
         {
             String line;
-            while ((line = r.readLine()) != null)
+            while ((line = BoundedLineReader.readLine(r, 5_000_000)) != null)
             {
                 builder.add(line.trim());
             }
