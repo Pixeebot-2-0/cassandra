@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.distributed.impl;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -246,6 +247,7 @@ public class IsolatedExecutor implements IIsolatedExecutor
         try (ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
              ObjectInputStream ois = new ObjectInputStream(bais))
         {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
             return ois.readObject();
         }
         catch (IOException | ClassNotFoundException e)
