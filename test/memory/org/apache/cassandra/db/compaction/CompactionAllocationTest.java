@@ -20,6 +20,7 @@ package org.apache.cassandra.db.compaction;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -575,8 +576,8 @@ public class CompactionAllocationTest
         testTinyPartitions("tinyOverlapping9", 9, maybeInflate(300, 6), true);
     }
 
-    private static final Random globalRandom = new Random();
-    private static final Random localRandom = new Random();
+    private static final Random globalRandom = new SecureRandom();
+    private static final Random localRandom = new SecureRandom();
 
     public static String makeRandomString(int length)
     {

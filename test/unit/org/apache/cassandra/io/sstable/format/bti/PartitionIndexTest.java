@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -345,7 +346,7 @@ public class PartitionIndexTest
         try (PartitionIndex summary = random.right)
         {
             List<DecoratedKey> keys = random.left;
-            Random rand = new Random();
+            Random rand = new SecureRandom();
 
             for (int i = 0; i < 1000; ++i)
             {

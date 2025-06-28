@@ -21,6 +21,7 @@ package org.apache.cassandra.distributed.test;
 import java.io.IOException;
 
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -170,7 +171,7 @@ public class OptimiseStreamsRepairTest extends TestBaseImpl
                 cluster.coordinator(1).execute("INSERT INTO " + KEYSPACE + ".tbl (id, t) values (?,?)", ConsistencyLevel.ALL, i, i);
             cluster.forEach((i) -> i.flush(KEYSPACE));
 
-            Random r = new Random();
+            Random r = new SecureRandom();
             for (int i = 0; i < 500; i++)
                 for (int j = 1; j <= 3; j++)
                     cluster.get(j).executeInternal("INSERT INTO "+KEYSPACE+".tbl (id, t) values (?,?)", r.nextInt(), i * 2 + 2);

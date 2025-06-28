@@ -19,6 +19,7 @@
 package org.apache.cassandra.distributed.test.log;
 
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -1034,7 +1035,7 @@ public class ClusterMetadataTestHelper
         return new ByteOrderedPartitioner.BytesToken(ByteBufferUtil.bytes(token));
     }
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
     public static int randomInt()
     {
         return randomInt(Integer.MAX_VALUE);

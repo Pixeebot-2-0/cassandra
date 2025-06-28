@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.cql3;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -77,7 +78,7 @@ public class ManyRowsTest extends CQLTester
                    row(0, 0, 0));
 
         // insert approximately 1000 random rows between 0 and 10k
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         Set<Integer> clusteringValues = new HashSet<>();
         for (int i = 0; i < 1000; i++)
             clusteringValues.add(rnd.nextInt(10000));

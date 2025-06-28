@@ -19,6 +19,7 @@
 package org.apache.cassandra.utils;
 
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.*;
 
 import com.google.common.collect.AbstractIterator;
@@ -329,7 +330,7 @@ public class MerkleTreesTest
         mts = new MerkleTrees(partitioner);
         mts.addMerkleTree(32, fullRange());
 
-        Random random = new Random();
+        Random random = new SecureRandom();
         while (true)
         {
             if (!mts.split(tok(random.nextInt(max))))
@@ -517,7 +518,7 @@ public class MerkleTreesTest
 
         HIterator(int... tokens)
         {
-            this(new Random(), tokens);
+            this(new SecureRandom(), tokens);
         }
 
         HIterator(Random random, int... tokens)
@@ -531,7 +532,7 @@ public class MerkleTreesTest
 
         public HIterator(Token... tokens)
         {
-            this(new Random(), tokens);
+            this(new SecureRandom(), tokens);
         }
 
         HIterator(Random random, Token... tokens)

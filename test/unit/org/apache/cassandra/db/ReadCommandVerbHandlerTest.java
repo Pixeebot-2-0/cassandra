@@ -19,6 +19,7 @@
 package org.apache.cassandra.db;
 
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.Random;
 import java.util.UUID;
@@ -56,7 +57,7 @@ import static org.junit.Assert.assertTrue;
 
 public class ReadCommandVerbHandlerTest
 {
-    private final static Random random = new Random();
+    private final static Random random = new SecureRandom();
 
     private static ReadCommandVerbHandler handler;
     private static TableMetadata metadata;

@@ -20,6 +20,7 @@ package org.apache.cassandra.io.util;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.junit.Test;
@@ -166,7 +167,7 @@ public class PageAwareTest
     @Test
     public void randomizedTest()
     {
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         for (int i = 0; i < 100000; ++i)
         {
             long pos = rand.nextLong() & ((1L << rand.nextInt(64)) - 1);    // positive long with random length

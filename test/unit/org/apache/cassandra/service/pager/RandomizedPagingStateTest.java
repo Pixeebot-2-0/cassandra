@@ -18,6 +18,7 @@
 package org.apache.cassandra.service.pager;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -39,7 +40,7 @@ import org.apache.cassandra.utils.ByteBufferUtil;
 
 public class RandomizedPagingStateTest
 {
-    private static final Random rnd = new Random();
+    private static final Random rnd = new SecureRandom();
     private static final int ROUNDS = 50_000;
     private static final int MAX_PK_SIZE = 3000;
     private static final int MAX_CK_SIZE = 3000;

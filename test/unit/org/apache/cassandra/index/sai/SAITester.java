@@ -28,6 +28,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.channels.FileChannel;
 import java.nio.file.StandardOpenOption;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -259,7 +260,7 @@ public abstract class SAITester extends CQLTester.Fuzzed
                     raf.seek(file.length());
 
                     byte[] corruptedData = new byte[100];
-                    new Random().nextBytes(corruptedData);
+                    new SecureRandom().nextBytes(corruptedData);
                     raf.write(corruptedData);
                 }
             }

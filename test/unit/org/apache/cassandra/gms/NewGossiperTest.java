@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.gms;
 
+import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -137,7 +138,7 @@ public class NewGossiperTest
     @Test
     public void testIncompleteState()
     {
-        Map<InetAddressAndPort, EndpointState> epstates = buildEpstates(Collections.singleton(fakePeers.iterator().next()), new Random());
+        Map<InetAddressAndPort, EndpointState> epstates = buildEpstates(Collections.singleton(fakePeers.iterator().next()), new SecureRandom());
         assertTrue(GossipHelper.isValidForClusterMetadata(epstates));
         Map<InetAddressAndPort, EndpointState> brokenEpstates = new HashMap<>();
         for (Map.Entry<InetAddressAndPort, EndpointState> entry : epstates.entrySet())

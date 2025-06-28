@@ -21,6 +21,7 @@ package org.apache.cassandra.utils.obs;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +36,7 @@ import static org.junit.Assert.fail;
 
 public class OffHeapBitSetTest
 {
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
     static void compare(IBitSet bs, IBitSet newbs)
     {

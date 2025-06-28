@@ -22,6 +22,7 @@ package org.apache.cassandra.stress.operations.userdefined;
 
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -38,7 +39,7 @@ public class SchemaQuery extends SchemaStatement
 {
     final ArgSelect argSelect;
     final Object[][] randomBuffer;
-    final Random random = new Random();
+    final Random random = new SecureRandom();
 
     public SchemaQuery(Timer timer, StressSettings settings, PartitionGenerator generator, SeedManager seedManager, PreparedStatement statement, ConsistencyLevel cl, ArgSelect argSelect)
     {

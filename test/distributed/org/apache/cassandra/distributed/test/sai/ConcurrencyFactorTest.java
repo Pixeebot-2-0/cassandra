@@ -19,6 +19,7 @@
 package org.apache.cassandra.distributed.test.sai;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -71,7 +72,7 @@ public class ConcurrencyFactorTest extends TestBaseImpl
         SAIUtil.waitForIndexQueryable(cluster, KEYSPACE);
 
         String template = "INSERT INTO %s.%s (pk, state, gdp) VALUES (%s, %s)";
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         String fakeState, rowData;
         int i = 0;
         for (long val = 1_000_000_000L; val <= 16_000_000_000L; val += 1_000_000_000L)

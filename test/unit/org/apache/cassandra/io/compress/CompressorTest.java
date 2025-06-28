@@ -22,6 +22,7 @@ import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.StandardOpenOption;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
@@ -80,7 +81,7 @@ public class CompressorTest
 
         final int restoreOffset = 5;
         final byte[] restored = new byte[restoreOffset + len];
-        new Random().nextBytes(restored);
+        new SecureRandom().nextBytes(restored);
 
         // need byte[] representation which direct buffers don't have
         byte[] compressedBytes = new byte[compressed.capacity()];
@@ -119,7 +120,7 @@ public class CompressorTest
     public void testMappedFile() throws IOException
     {
         byte[] data = new byte[1 << 20];
-        new Random().nextBytes(data);
+        new SecureRandom().nextBytes(data);
         ByteBuffer src = makeBB(data.length);
         src.put(data);
         src.flip();
@@ -131,7 +132,7 @@ public class CompressorTest
         // Prepend some random bytes to the output and compress
         final int outOffset = 3;
         byte[] garbage = new byte[outOffset + compressor.initialCompressedBufferLength(data.length)];
-        new Random().nextBytes(garbage);
+        new SecureRandom().nextBytes(garbage);
         ByteBuffer dest = makeBB(outOffset + compressor.initialCompressedBufferLength(data.length));
         dest.put(garbage);
         dest.clear();
@@ -214,7 +215,7 @@ public class CompressorTest
         {
             int n = RandomAccessReader.DEFAULT_BUFFER_SIZE;
             byte[] srcData = new byte[n];
-            new Random().nextBytes(srcData);
+            new SecureRandom().nextBytes(srcData);
 
             final int inOffset = 2;
             ByteBuffer src = typeIn.allocate(inOffset + n + inOffset);
@@ -225,7 +226,7 @@ public class CompressorTest
             int outOffset = 5;
             ByteBuffer compressed = typeComp.allocate(outOffset + compressor.initialCompressedBufferLength(srcData.length) + outOffset);
             byte[] garbage = new byte[compressed.capacity()];
-            new Random().nextBytes(garbage);
+            new SecureRandom().nextBytes(garbage);
             compressed.put(garbage);
             compressed.position(outOffset).limit(compressed.capacity() - outOffset);
 
@@ -262,7 +263,7 @@ public class CompressorTest
     private void fillBBWithRandom(ByteBuffer dest)
     {
         byte[] random = new byte[dest.capacity()];
-        new Random().nextBytes(random);
+        new SecureRandom().nextBytes(random);
         dest.clear();
         dest.put(random);
     }

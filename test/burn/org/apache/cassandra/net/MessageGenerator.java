@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -41,7 +42,7 @@ abstract class MessageGenerator
     private MessageGenerator(long seed)
     {
         this.seed = seed;
-        this.random = new Random();
+        this.random = new SecureRandom();
     }
 
     Message.Builder<Object> builder(long id)

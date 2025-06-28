@@ -19,6 +19,7 @@
 package org.apache.cassandra.db.tries;
 
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public abstract class InMemoryTrieTestBase
     private static final int MIN_LENGTH = 10;
     private static final int MAX_LENGTH = 50;
 
-    Random rand = new Random();
+    Random rand = new SecureRandom();
 
     static final ByteComparable.Version VERSION = InMemoryTrie.BYTE_COMPARABLE_VERSION;
 

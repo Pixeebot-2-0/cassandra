@@ -21,6 +21,7 @@ package org.apache.cassandra.utils.binlog;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -90,7 +91,7 @@ public class DeletingArchiverTest
 
     private List<File> generateFiles(int size, int count) throws IOException
     {
-        Random r = new Random();
+        Random r = new SecureRandom();
         List<File> files = new ArrayList<>(count);
         byte [] content = new byte[size];
         r.nextBytes(content);

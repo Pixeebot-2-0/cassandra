@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -377,7 +378,7 @@ public class FQLReplayTest
         List<File> resultPaths = new ArrayList<>();
         targetHosts.forEach(host -> { File f = new File(tmpDir, host); f.mkdir(); resultPaths.add(f);});
         List<Pair<FQLQuery, List<ResultHandler.ComparableResultSet>>> resultSets = new ArrayList<>();
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < 10; i++)
         {
             List<ResultHandler.ComparableResultSet> results = new ArrayList<>();
@@ -427,7 +428,7 @@ public class FQLReplayTest
         targetHosts.forEach(host -> { File f = new File(tmpDir, host); f.mkdir(); resultPaths.add(f);});
 
         List<Pair<FQLQuery, List<ResultHandler.ComparableResultSet>>> resultSets = new ArrayList<>();
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < 10; i++)
         {
             List<ResultHandler.ComparableResultSet> results = new ArrayList<>();
@@ -684,7 +685,7 @@ public class FQLReplayTest
 
     private File generateQueries(int count, boolean random) throws IOException
     {
-        Random r = new Random();
+        Random r = new SecureRandom();
         File dir = Files.createTempDirectory("chronicle").toFile();
         try (ChronicleQueue readQueue = SingleChronicleQueueBuilder.single(dir).build())
         {
@@ -739,7 +740,7 @@ public class FQLReplayTest
     static ResultHandler.ComparableResultSet createResultSet(int columnCount, int rowCount, boolean random)
     {
         List<Pair<String, String>> columnDefs = new ArrayList<>(columnCount);
-        Random r = new Random();
+        Random r = new SecureRandom();
         for (int i = 0; i < columnCount; i++)
         {
             columnDefs.add(Pair.create("a" + i, "int"));

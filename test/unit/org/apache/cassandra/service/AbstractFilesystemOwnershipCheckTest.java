@@ -21,6 +21,7 @@ package org.apache.cassandra.service;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.Random;
@@ -152,7 +153,7 @@ public abstract class AbstractFilesystemOwnershipCheckTest
 
     public static String makeRandomString(int length)
     {
-        Random random = new Random();
+        Random random = new SecureRandom();
         char[] chars = new char[length];
         for (int i = 0; i < length; ++i)
             chars[i] = (char) ('a' + random.nextInt('z' - 'a' + 1));

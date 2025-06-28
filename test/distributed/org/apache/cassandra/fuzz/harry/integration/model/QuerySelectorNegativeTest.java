@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.fuzz.harry.integration.model;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class QuerySelectorNegativeTest extends IntegrationTestBase
 {
     private final int CYCLES = 1000;
 
-    private final Random rnd = new Random();
+    private final Random rnd = new SecureRandom();
 
     private final QueryResponseCorruptorFactory corruptorFactory;
 

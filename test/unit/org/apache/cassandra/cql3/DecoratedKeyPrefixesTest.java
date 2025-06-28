@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.cql3;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import org.junit.Assume;
@@ -46,7 +47,7 @@ public class DecoratedKeyPrefixesTest extends CQLTester
     String[] samePrefixBefore;
     String[] samePrefixAfter;
 
-    Random rand = new Random();
+    Random rand = new SecureRandom();
 
     // Must be called the same as CQLTester's version to ensure it overrides it
     @BeforeClass

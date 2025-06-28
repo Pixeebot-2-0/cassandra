@@ -18,6 +18,7 @@
 
 package org.apache.cassandra.distributed.test.log;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -66,7 +67,7 @@ public class PlacementSimulatorTest
     {
         testMove(minToken, 200, 300, 400, 350, new SimpleReplicationFactor(3));
 
-        Random rng = new Random();
+        Random rng = new SecureRandom();
         for (int i = 0; i < 1000; i++)
         {
             PrimitiveIterator.OfInt ints = rng.ints(5).distinct().iterator();
@@ -125,7 +126,7 @@ public class PlacementSimulatorTest
     {
         testBootstrap(100, 200, 300, 400, newToken, new SimpleReplicationFactor(3));
 
-        Random rng = new Random();
+        Random rng = new SecureRandom();
         for (int i = 0; i < 1000; i++)
         {
             PrimitiveIterator.OfInt ints = rng.ints(5).distinct().iterator();
@@ -185,7 +186,7 @@ public class PlacementSimulatorTest
     {
         testDecommission(minToken, 200, 300, 400, 350, new SimpleReplicationFactor(3));
 
-        Random rng = new Random();
+        Random rng = new SecureRandom();
         for (int i = 0; i < 1000; i++)
         {
             PrimitiveIterator.OfInt ints = rng.ints(5).distinct().iterator();
