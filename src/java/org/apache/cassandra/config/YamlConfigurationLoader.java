@@ -17,6 +17,8 @@
  */
 package org.apache.cassandra.config;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -83,7 +85,7 @@ public class YamlConfigurationLoader implements ConfigurationLoader
         URL url;
         try
         {
-            url = new URL(configUrl);
+            url = Urls.create(configUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             url.openStream().close(); // catches well-formed but bogus URLs
         }
         catch (Exception e)

@@ -18,6 +18,8 @@
 
 package org.apache.cassandra.locator;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,7 +56,7 @@ abstract class AbstractCloudMetadataServiceConnector
 
         try
         {
-            URL url = new URL(parsedMetadataServiceUrl);
+            URL url = Urls.create(parsedMetadataServiceUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             url.toURI();
 
             this.metadataServiceUrl = parsedMetadataServiceUrl;
@@ -107,7 +109,7 @@ abstract class AbstractCloudMetadataServiceConnector
         try
         {
             // Populate the region and zone by introspection, fail if 404 on metadata
-            conn = (HttpURLConnection) new URL(url + query).openConnection();
+            conn = (HttpURLConnection) Urls.create(url + query, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
             extraHeaders.forEach(conn::setRequestProperty);
             conn.setRequestMethod(method);
             conn.setConnectTimeout(requestTimeoutMs);
